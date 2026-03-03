@@ -1,0 +1,29 @@
+services:
+ app:
+  image: python:alpine
+  networks: 
+   - app_network
+  build: .
+  restart: on-failure
+  env_file: .env
+  DB_HOST: redis
+  volumes:
+   - ./app:/home/myuser/app
+  container_name: System_Monitor_app
+  deploy:
+   resources:
+    limit:
+     memory: 100M
+  depends_on:
+   redis:
+    condition: service_healthy      
+
+     
+ redis:
+  image: redis:alpine
+  networks:
+   - app_network
+  container_name: System_Monitor_redis
+networks: app_network
+   
+    
