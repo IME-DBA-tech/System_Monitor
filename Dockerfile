@@ -1,4 +1,4 @@
-FROM python:alpine as builder
+FROM python:alpine AS builder
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ COPY --from=builder --chown=myuser:myuser /root/.local /home/myuser/app/.local
 
 COPY --chown=myuser:myuser  /app .
 
-ENV path=/home/myuser/app/.local/bin:$path
+ENV path=/home/myuser/app/.local/bin:$PATH
 
 HEALTHCHECK --interval=30s --timeout=3s \
   CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:5000'); exit(0)"

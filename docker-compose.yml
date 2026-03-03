@@ -6,7 +6,8 @@ services:
   build: .
   restart: on-failure
   env_file: .env
-  DB_HOST: redis
+  environment:
+   - REDIS_HOST=redis
   volumes:
    - ./app:/home/myuser/app
   container_name: System_Monitor_app
@@ -24,6 +25,13 @@ services:
   networks:
    - app_network
   container_name: System_Monitor_redis
+  healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 5s
+        timeout: 3s
+        retries: 5
+
+  
 networks: app_network
    
     
