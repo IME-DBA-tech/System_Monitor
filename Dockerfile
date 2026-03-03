@@ -1,4 +1,4 @@
-FROM python:alpine AS builder
+FROM python:slim AS builder
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ COPY app/requirements.txt .
 
 RUN  pip install  --no-cache-dir -r requirements.txt
 
-FROM python:alpine
+FROM python:slim
 
 RUN adduser -D myuser
 
