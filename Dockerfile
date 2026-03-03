@@ -14,8 +14,7 @@ RUN  pip install  --no-cache-dir -r requirements.txt
 
 FROM python:slim
 
-RUN adduser -D myuser
-
+RUN useradd -m myuser
 USER myuser
 
 WORKDIR /home/myuser/app
